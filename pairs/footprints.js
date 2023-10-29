@@ -1,7 +1,7 @@
 let i = 0;
 let j = 0;
 let users = [];
-const maxWaitingSecond = 10;
+const maxWaitingCount = 10;
 const min = 1;
 const max = 3;
 
@@ -18,14 +18,14 @@ const showUser = () => {
         setTimeout(() => users[i].click(), (Math.floor( Math.random() * (max + 1 - min) ) + min) * 1000);
         console.log('合計:' + i);
         i++;
-        j = i;
+        j = 0;
     } else {
         users = getUsers();
         if (i !== 0) {
             scrollBottom();
         }
         j++;
-        const viewedAllUsers = maxWaitingSecond < (j - i);
+        const viewedAllUsers = j < maxWaitingCount;
         if (viewedAllUsers) {
             clearInterval(interval);
             location.href = 'https://pairs.lv/';
