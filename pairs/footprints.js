@@ -25,7 +25,7 @@ const showUser = () => {
             scrollBottom();
         }
         j++;
-        const viewedAllUsers = j < maxWaitingCount;
+        const viewedAllUsers = maxWaitingCount < j;
         if (viewedAllUsers) {
             clearInterval(interval);
             location.href = 'https://pairs.lv/';
