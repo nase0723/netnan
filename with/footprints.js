@@ -1,7 +1,7 @@
 // sessionStorage['oldUrls'] = [];
 
-const min = 1;
-const max = 2;
+const min = 5;
+const max = 10;
 
 const getOldUrls = () => sessionStorage['oldUrls'] ? JSON.parse(sessionStorage['oldUrls']) : [];
 
@@ -54,4 +54,4 @@ const showUser = () => {
     }, 1000);
 }
 
-setTimeout(() => showUser(), (Math.floor( Math.random() * (max + 1 - min) ) + min) * 1000)
+setTimeout(() => showUser(), (Math.floor( Math.random() * (max + 1 - min) ) + min) * 100)
