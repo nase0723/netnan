@@ -1,8 +1,15 @@
+## Auto Runner
+https://chrome.google.com/webstore/detail/scriptautorunner/gpgjofmpmjjopcogjgdldidobhmjmdbm
+
 ## CDN
 https://www.jsdelivr.com/?docs=gh
 
-https://chrome.google.com/webstore/detail/scriptautorunner/gpgjofmpmjjopcogjgdldidobhmjmdbm
-
+### pairs
 ```
-https://cdn.jsdelivr.net/gh/nase0723/netonan@main/with/footprints.js
+https://cdn.jsdelivr.net/gh/nase0723/netnan@main/pairs/footprints.js
+```
+
+### with
+```
+https://cdn.jsdelivr.net/gh/nase0723/netnan@main/with/footprints.js
 ```
