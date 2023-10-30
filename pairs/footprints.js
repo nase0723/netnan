@@ -14,7 +14,7 @@ const scrollBottom = () => {
 
 const getUsers = () => document.getElementsByClassName('css-opde7s');
 
-const redirectToHome = (count, maxCount) => {
+const redirectToHomeIfReached = (count, maxCount) => {
     if (maxCount < count) {
         clearInterval(interval);
         location.href = 'https://pairs.lv/';
@@ -33,9 +33,9 @@ const showUser = () => {
             scrollBottom();
         }
         j++;
-        redirectToHome(j, maxWaitingCount);
+        redirectToHomeIfReached(j, maxWaitingCount);
     }
-    redirectToHome(i, maxViewedCount);
+    redirectToHomeIfReached(i, maxViewedCount);
 }
 
 const interval = setInterval(() => showUser(), 1500);
