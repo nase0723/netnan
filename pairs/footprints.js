@@ -24,9 +24,10 @@ const redirectToHomeIfReached = (count, maxCount) => {
 const showUser = () => {
     if (i < users.length) {
         setTimeout(() => users[i].click(), (Math.floor( Math.random() * (max + 1 - min) ) + min) * 1000);
-        console.log('合計:' + i);
         i++;
+        console.log('合計:' + i);
         j = 0;
+        redirectToHomeIfReached(i, maxViewedCount);
     } else {
         users = getUsers();
         if (i !== 0) {
@@ -35,7 +36,6 @@ const showUser = () => {
         j++;
         redirectToHomeIfReached(j, maxWaitingCount);
     }
-    redirectToHomeIfReached(i, maxViewedCount);
 }
 
 const interval = setInterval(() => showUser(), 1500);
