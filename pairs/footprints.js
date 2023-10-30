@@ -1,6 +1,7 @@
 let i = 0;
 let j = 0;
 let users = [];
+const maxViewedCount = 1000;
 const maxWaitingCount = 10;
 const min = 1;
 const max = 3;
@@ -12,6 +13,13 @@ const scrollBottom = () => {
 }
 
 const getUsers = () => document.getElementsByClassName('css-opde7s');
+
+const redirectToHome = (count, maxCount) => {
+    if (maxCount < count) {
+        clearInterval(interval);
+        location.href = 'https://pairs.lv/';
+    }
+}
 
 const showUser = () => {
     if (i < users.length) {
@@ -25,12 +33,9 @@ const showUser = () => {
             scrollBottom();
         }
         j++;
-        const viewedAllUsers = maxWaitingCount < j;
-        if (viewedAllUsers) {
-            clearInterval(interval);
-            location.href = 'https://pairs.lv/';
-        }
+        redirectToHome(j, maxWaitingCount);
     }
+    redirectToHome(i, maxViewedCount);
 }
 
 const interval = setInterval(() => showUser(), 1500);
