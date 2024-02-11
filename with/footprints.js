@@ -1,17 +1,26 @@
 // sessionStorage['oldUrls'] = [];
+// sessionStorage['urls'] = [];
 
+// const maxArraySavedCount = 3000;
+const maxArraySavedCount = 30;
 const min = 5;
 const max = 10;
 
-const getOldUrls = () => sessionStorage['oldUrls'] ? JSON.parse(sessionStorage['oldUrls']) : [];
+const getUrlsFromSession = (key) => sessionStorage[key] ? JSON.parse(sessionStorage[key]) : [];
 
-const pushOldUrl = (url) => {
-    let oldUrls = getOldUrls();
-    oldUrls.push(url);
-    saveOldUrls(oldUrls);
+const pushUrlToSession = (key, url) => {
+    let urls = getUrlsFromSession(key);
+    urls.push(url);
+    saveUrlsToSession(key, urls);
 }
 
-const saveOldUrls = (oldUrls) => sessionStorage['oldUrls'] = JSON.stringify(oldUrls);
+const removeUrlFromSession = (key, value) => {
+    let urls = getUrlsFromSession(key);
+    urls = urls.filter((url) => !(url === value));
+    saveUrlsToSession(key, urls);
+}
+
+const saveUrlsToSession = (key, values) => sessionStorage[key] = JSON.stringify(values);
 
 const scrollBottom = () => {
     const element = document.documentElement;
@@ -21,36 +30,47 @@ const scrollBottom = () => {
 
 const getUsers = (partOfUrl) => Array.from(document.querySelectorAll('a'), a=>a.href).filter((x, i, self) => x.includes(partOfUrl));
 
-const redirect = (oldUrls) => {
-    const partOfUrl = '?number=';
-    let urls = getUsers(partOfUrl);
-    if (oldUrls.length < urls.length) {
-        for (const url of urls) {
-            if (!oldUrls.includes(url)) {
-                pushOldUrl(url);
-                location.href = url;
-                return true;
-            }
+
+const redirect = (urls, oldUrls) => {
+    console.log('urls '+urls.length);
+    console.log('oldUrls '+oldUrls.length);
+    for (const url of urls) {
+        if (!oldUrls.includes(url)) {
+            pushUrlToSession('oldUrls', url);
+            removeUrlFromSession('urls', url);
+            location.href = url;
+            return true;
         }
-    } else {
-        scrollBottom();
     }
+    return false;
 }
 
-const showUser = () => {
+const redirectToHome = () => {
     const home = 'https://with.is/search';
     if (location.href !== home) {
         location.href = home;
         return;
     }
-    const oldUrls = getOldUrls();
-    if (redirect(oldUrls)) {
-        return;
+}
+
+const showUser = () => {
+    const urls = getUrlsFromSession('urls');
+    const oldUrls = getUrlsFromSession('oldUrls');
+    if (redirect(urls, oldUrls)) {
+        return true;
     }
     const located = setInterval(() => {
-        if (redirect(oldUrls)) {
+        if (redirect(urls, oldUrls)) {
             return clearInterval(located);
         }
+        if (maxArraySavedCount < oldUrls.length) {
+            sessionStorage['oldUrls'] = [];
+        }
+        sessionStorage['urls'] = [];
+        redirectToHome();
+        scrollBottom();
+        const users = getUsers('?number=');
+        saveUrlsToSession('urls', users);
     }, 1000);
 }
 
