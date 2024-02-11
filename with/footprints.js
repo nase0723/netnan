@@ -1,8 +1,7 @@
 // sessionStorage['oldUrls'] = [];
 // sessionStorage['urls'] = [];
 
-// const maxArraySavedCount = 3000;
-const maxArraySavedCount = 30;
+const maxArraySavedCount = 3000;
 const min = 5;
 const max = 10;
 
