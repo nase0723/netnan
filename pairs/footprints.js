@@ -9,17 +9,14 @@ const baseUrl = 'https://pairs.lv/search/all';
 
 const getUrlQueries = () => {
     let queryStr = window.location.search.slice(1);
-    queries = {};
-
+    let queries = {};
     if (!queryStr) {
         return queries;
     }
-
-    queryStr.split('&').forEach(function (queryStr) {
+    queryStr.split('&').forEach(queryStr => {
         let queryArr = queryStr.split('=');
         queries[queryArr[0]] = queryArr[1];
     });
-
     return queries;
 }
 
@@ -39,6 +36,9 @@ const redirectToHomeIfReached = (count, maxCount) => {
 }
 
 const showUser = () => {
+    if (!location.href.includes(baseUrl)) {
+        return;
+    }
     if (i < users.length) {
         setTimeout(() => users[i].click(), (Math.floor( Math.random() * (max + 1 - min) ) + min) * 1000);
         i++;
