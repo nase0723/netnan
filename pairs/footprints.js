@@ -6,17 +6,33 @@ const maxWaitingCount = 10;
 const min = 1;
 const max = 3;
 
+const getUrlQueries = () => {
+    let queryStr = window.location.search.slice(1);
+    queries = {};
+
+    if (!queryStr) {
+        return queries;
+    }
+
+    queryStr.split('&').forEach(function (queryStr) {
+        let queryArr = queryStr.split('=');
+        queries[queryArr[0]] = queryArr[1];
+    });
+
+    return queries;
+}
+
 const scrollBottom = () => {
     const element = document.documentElement;
     const bottom = element.scrollHeight - element.clientHeight;
     window.scroll(0, bottom);
 }
 
-const getUsers = () => Array.from(document.querySelectorAll('a'), a=>a.href).filter((x, i, self) => x.includes('search/all/partner'));
+const getUsers = () => Array.from(document.querySelectorAll('a')).filter((el) => el.href.includes('search/all/partner'));
 
 const redirectToHomeIfReached = (count, maxCount) => {
     if (maxCount < count) {
-        clearInterval(interval);
+        clearInterval(running);
         location.href = 'https://pairs.lv/';
     }
 }
@@ -38,4 +54,6 @@ const showUser = () => {
     }
 }
 
-const interval = setInterval(() => showUser(), 1500);
+
+const interval = getUrlQueries().interval ?? 1500;
+const running = setInterval(() => showUser(), interval);
