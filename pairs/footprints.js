@@ -5,6 +5,7 @@ const maxViewedCount = 1000;
 const maxWaitingCount = 10;
 const min = 1;
 const max = 3;
+const baseUrl = 'https://pairs.lv/search/all';
 
 const getUrlQueries = () => {
     let queryStr = window.location.search.slice(1);
@@ -33,7 +34,7 @@ const getUsers = () => Array.from(document.querySelectorAll('a')).filter((el) =>
 const redirectToHomeIfReached = (count, maxCount) => {
     if (maxCount < count) {
         clearInterval(running);
-        location.href = 'https://pairs.lv/';
+        location.href = baseUrl + '?interval=' + interval;
     }
 }
 
