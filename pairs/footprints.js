@@ -12,7 +12,7 @@ const scrollBottom = () => {
     window.scroll(0, bottom);
 }
 
-const getUsers = () => document.getElementsByClassName('css-opde7s');
+const getUsers = () => Array.from(document.querySelectorAll('a'), a=>a.href).filter((x, i, self) => x.includes('search/all/partner'));
 
 const redirectToHomeIfReached = (count, maxCount) => {
     if (maxCount < count) {
