@@ -1,7 +1,8 @@
 ## Auto Runner
 https://chrome.google.com/webstore/detail/scriptautorunner/gpgjofmpmjjopcogjgdldidobhmjmdbm
 
-![image](https://github.com/nase0723/netnan/assets/65945392/1c0dce69-ade1-4c9f-893b-28f81ceba749)
+![image](https://github.com/user-attachments/assets/e4859159-e410-4ffb-bb78-f19397eb1bfc)
+
 
 ### pairs
 https://pairs.lv/search/all?interval=1000
