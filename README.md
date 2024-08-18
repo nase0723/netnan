@@ -19,4 +19,11 @@ https://cdn.jsdelivr.net/gh/nase0723/netnan@main/pairs/footprints.js
 https://cdn.jsdelivr.net/gh/nase0723/netnan@main/with/footprints.js
 ```
 
+### tokare
+```
+https://cdn.jsdelivr.net/gh/nase0723/netnan@main/tokare/tokare.js
+```
 
+```
+tokyo-calendar-date.jp
+```
