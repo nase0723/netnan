@@ -28,6 +28,19 @@ const sendGood = (i) => {
     }
 }
 
+const getUsersToSendGood = async () => {
+    const interval = 1000;
+    setTimeout(() => {
+        const getUsers = () => Array.from(document.querySelectorAll('div')).filter((el) => el.className.includes('user_img'));
+        users = getUsers();
+        if (users.length) {
+            sendGood(0);
+        } else {
+            getUsersToSendGood();
+        }
+    }, interval);
+}
+
 const scrollBottom = () => {
     const element = document.documentElement;
     const bottom = element.scrollHeight - element.clientHeight;
@@ -62,11 +75,7 @@ const sendFirstMessage = () => {
 
 // いいね送信
 if (location.href.includes(listUrl)) {
-    setTimeout(() => {
-        const getUsers = () => Array.from(document.querySelectorAll('div')).filter((el) => el.className.includes('user_img'));
-        users = getUsers();
-        sendGood(0)
-    }, timeout);
+    getUsersToSendGood();
 }
 
 // 初回メッセージ送信（チャットルームに入る）
